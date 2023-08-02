@@ -667,7 +667,8 @@
 								}
 							}
 						},
-						"url": "{{base_url}}/users/{{userId}}"
+						"url": "{{base_url}}/users/{{userId}}",
+						"description": "API untuk menghapus user yang telah ditambahkan\n\nPenjelasan field:\n\n- user id -> id user yang ingin dihapus"
 					},
 					"response": []
 				}
