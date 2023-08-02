@@ -597,6 +597,25 @@
 				},
 				{
 					"name": "Update user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "50ad6584-2e8d-466e-9290-c486de4c12e1",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.test(\"Update data is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql('success');\r",
+									"    pm.expect(jsonData.message).to.eql('User berhasil diupdate');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "3022d5bb-fc16-4f83-bc75-c6635c12ecb4",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -619,7 +638,7 @@
 								}
 							}
 						},
-						"url": "{{base_url}}/users/123",
+						"url": "{{base_url}}/users/{{userId}}",
 						"description": "API untuk mengubah data user\n\nPenjelasan field:\n\n- name -> nama yang ingin diubah\n- email-> email user yang ingin diubah"
 					},
 					"response": []
