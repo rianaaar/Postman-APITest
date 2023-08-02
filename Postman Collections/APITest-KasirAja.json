@@ -32,7 +32,7 @@
 							}
 						}
 					],
-					"_postman_id": "904e97ad-5e1c-48a0-918b-50ae1339406e",
+					"id": "904e97ad-5e1c-48a0-918b-50ae1339406e",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -79,7 +79,7 @@
 							}
 						}
 					],
-					"_postman_id": "bc3ee228-ae32-4334-b051-2f6cbbc70cd8",
+					"id": "bc3ee228-ae32-4334-b051-2f6cbbc70cd8",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -101,7 +101,7 @@
 					"response": []
 				}
 			],
-			"_postman_id": "8148e4a2-9b11-497b-90e1-c7b2c346e579",
+			"id": "8148e4a2-9b11-497b-90e1-c7b2c346e579",
 			"description": "API register dan login untuk mengakses fungsi lain dari API KasirAja"
 		},
 		{
@@ -132,7 +132,7 @@
 							}
 						}
 					],
-					"_postman_id": "f1874cfe-f5cf-48ec-8f0c-2fe3905c929e",
+					"id": "f1874cfe-f5cf-48ec-8f0c-2fe3905c929e",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -185,7 +185,7 @@
 							}
 						}
 					],
-					"_postman_id": "cd56dfb9-86f2-4ef2-9e04-7605c7de846b",
+					"id": "cd56dfb9-86f2-4ef2-9e04-7605c7de846b",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -245,7 +245,7 @@
 							}
 						}
 					],
-					"_postman_id": "2c2cc2fb-9607-46e6-8c11-506831d80c2f",
+					"id": "2c2cc2fb-9607-46e6-8c11-506831d80c2f",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -294,7 +294,7 @@
 							}
 						}
 					],
-					"_postman_id": "07f517d1-dc00-43f7-92e4-65f782c72d0d",
+					"id": "07f517d1-dc00-43f7-92e4-65f782c72d0d",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -345,7 +345,7 @@
 							}
 						}
 					],
-					"_postman_id": "9b900c7f-7d06-4268-8259-6c3c5a087c76",
+					"id": "9b900c7f-7d06-4268-8259-6c3c5a087c76",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -416,7 +416,7 @@
 							}
 						}
 					],
-					"_postman_id": "3917d6ce-0f03-416f-afef-6e0da0890ff2",
+					"id": "3917d6ce-0f03-416f-afef-6e0da0890ff2",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -468,7 +468,7 @@
 							}
 						}
 					],
-					"_postman_id": "cfd30946-11cc-4e4d-b27f-5e43b53f0c70",
+					"id": "cfd30946-11cc-4e4d-b27f-5e43b53f0c70",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -487,7 +487,7 @@
 					"response": []
 				}
 			],
-			"_postman_id": "8d66ef26-7542-41f2-8eab-bdf7becf9538",
+			"id": "8d66ef26-7542-41f2-8eab-bdf7becf9538",
 			"description": "API Management product"
 		},
 		{
@@ -511,7 +511,7 @@
 							}
 						}
 					],
-					"_postman_id": "c10f1687-1cf2-4133-8990-375c3b4df0da",
+					"id": "c10f1687-1cf2-4133-8990-375c3b4df0da",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -539,7 +539,7 @@
 				},
 				{
 					"name": "Get user list",
-					"_postman_id": "4318486f-ed2c-40f1-9173-35b57d5299f7",
+					"id": "4318486f-ed2c-40f1-9173-35b57d5299f7",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -581,7 +581,7 @@
 							}
 						}
 					],
-					"_postman_id": "608f3c66-b694-4683-bfaf-fccf55880769",
+					"id": "608f3c66-b694-4683-bfaf-fccf55880769",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -609,7 +609,7 @@
 				},
 				{
 					"name": "Update user",
-					"_postman_id": "3022d5bb-fc16-4f83-bc75-c6635c12ecb4",
+					"id": "3022d5bb-fc16-4f83-bc75-c6635c12ecb4",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -637,7 +637,7 @@
 				},
 				{
 					"name": "Delete user",
-					"_postman_id": "0f4f4850-fbbd-4adf-84b4-30af02921feb",
+					"id": "0f4f4850-fbbd-4adf-84b4-30af02921feb",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -664,7 +664,7 @@
 					"response": []
 				}
 			],
-			"_postman_id": "ed01b8b0-77cb-4212-ab36-5ef1916edd47",
+			"id": "ed01b8b0-77cb-4212-ab36-5ef1916edd47",
 			"description": "User management"
 		}
 	]
