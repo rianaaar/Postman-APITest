@@ -596,48 +596,6 @@
 					"response": []
 				},
 				{
-					"name": "Get all user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "5e309c4f-3b31-4462-8345-0204233fc225",
-								"exec": [
-									"pm.test(\"Body matches string\", function () {\r",
-									"    pm.expect(pm.response.text()).to.include(\"string_you_want_to_search\");\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "608f3c66-b694-4683-bfaf-fccf55880769",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "{{accessToken}}"
-							}
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{base_url}}/users/{{userId}}"
-					},
-					"response": []
-				},
-				{
 					"name": "Update user",
 					"id": "3022d5bb-fc16-4f83-bc75-c6635c12ecb4",
 					"protocolProfileBehavior": {
