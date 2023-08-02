@@ -619,7 +619,8 @@
 								}
 							}
 						},
-						"url": "{{base_url}}/users/123"
+						"url": "{{base_url}}/users/123",
+						"description": "API untuk mengubah data user\n\nPenjelasan field:\n\n- name -> nama yang ingin diubah\n- email-> email user yang ingin diubah"
 					},
 					"response": []
 				},
