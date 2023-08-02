@@ -546,6 +546,27 @@
 				},
 				{
 					"name": "Get user list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1d055e56-0122-4b51-8f33-ea0c9e357835",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql('success');\r",
+									"});\r",
+									"pm.test(\"User data is valid\", function(){\r",
+									"    pm.expect(jsonData.data.user.id).to.eql(pm.environment.get('userId'));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "4318486f-ed2c-40f1-9173-35b57d5299f7",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -561,7 +582,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"are\",\r\n    \"email\": \"are@email.com\",\r\n    \"password\": \"qashdjk\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
