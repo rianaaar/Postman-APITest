@@ -1,0 +1,671 @@
+{
+	"info": {
+		"_postman_id": "eb5b41d6-b973-4c30-904b-bda63ae18ece",
+		"name": "KasirAja",
+		"description": "API KasirAja\n\n**KasirAja** adalah sistem POS untuk penjualan dan pembelian yang simple dengan pengelolan produk multi user.\n\n**Base URL** : [_https://kasir-api.belajarqa.com_](https://kasir-api.belajarqa.com)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authorization",
+			"item": [
+				{
+					"name": "Registration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e306d3dd-1acf-4f0d-a88e-8171a664771d",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.test(\"Registration berhasil\", function(){\r",
+									"    pm.expect(pm.response.text()).to.include(\"Toko berhasil didaftarkan\");\r",
+									"});\r",
+									"pm.test(\"Email yang terdaftar sesuai\", function(){\r",
+									"    pm.expect(jsonData.data.email).to.eql(pm.environment.get(\"email\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "904e97ad-5e1c-48a0-918b-50ae1339406e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Are Store\",\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/registration",
+						"description": "API untuk melakukan pendaftaran toko\n\nPenjelasan field:\n\n- name -> nama toko yang akan didaftarkan di KasirAja\n- email -> email akun toko yang akan didaftarkan di KasirAja\n- password -> password akun toko yang akan didaftarkan di KasirAja"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d97a19d6-f1bf-4f9c-b457-291d015015ce",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.test(\"Login berhasil\", function(){\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"pm.test(\"Login di akun yang sesuai\", function(){\r",
+									"    pm.expect(jsonData.data.user.email).to.eql(pm.environment.get(\"email\"))\r",
+									"});\r",
+									"//console.log(jsonData.data.accessToken)\r",
+									"pm.environment.set(\"accessToken\", jsonData.data.accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "bc3ee228-ae32-4334-b051-2f6cbbc70cd8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/authentications",
+						"description": "Login ke akun yang sudah diregister\n\nPenjelasan field:\n\n- email -> email akun toko yang sudah terdaftar\n- password -> password akun toko yang sudah terdaftar"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "8148e4a2-9b11-497b-90e1-c7b2c346e579",
+			"description": "API register dan login untuk mengakses fungsi lain dari API KasirAja"
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Add category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dca22a0a-bd4b-4c44-914f-b90bb0e9b562",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"var jsonData = pm.response.json()\r",
+									"pm.test(\"Catgeory berhasil ditambahkan\", function(){\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"})\r",
+									"pm.test(\"Message sesuai\", function(){\r",
+									"    pm.expect(pm.response.text()).to.include(\"Category berhasil ditambahkan\");\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"categoryId\", jsonData.data.categoryId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "f1874cfe-f5cf-48ec-8f0c-2fe3905c929e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"cake {{$randomCity}}\",\r\n   \"description\": \"cake adalah kue dari kota\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/categories",
+						"description": "API untuk menambahkan category\n\nPenjelasan field:\n\n- name -> nama kategori yang ingin ditambahkan\n- description -> deskripsi dari kategori yang ingin ditambahkan"
+					},
+					"response": []
+				},
+				{
+					"name": "Get category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "84bd099b-aef8-4377-8b53-13fa0f881f89",
+								"exec": [
+									"pm.test(\"status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.test(\"Page is true\", function(){\r",
+									"    pm.expect(jsonData.data.meta.page).to.eql('1');\r",
+									"});\r",
+									"//console.log(jsonData.data.meta.page)\r",
+									"pm.test(\"Category yang telah dibuat terdapat di list\", function(){\r",
+									"    ctgy_id = pm.environment.get('categoryId');\r",
+									"    console.log(ctgy_id);\r",
+									"    pm.expect(pm.response.text()).include(ctgy_id);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "cd56dfb9-86f2-4ef2-9e04-7605c7de846b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/categories?page=1&q=cake",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "q",
+									"value": "cake"
+								}
+							]
+						},
+						"description": "API untuk mendapatkan list category yang telah dibuat\n\nPenjelasan field:\n\n- page -> jumlah halaman yang ingin ditampilkan\n- q -> query search berdasarkan nama kategori"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3682af97-972b-4955-85a2-ce894026e937",
+								"exec": [
+									"pm.test(\"Status code is 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.test(\"Produk berhasil ditambahkan\", function(){\r",
+									"    pm.expect(pm.response.text()).to.include(\"Product berhasil ditambahkan\");\r",
+									"});\r",
+									"pm.test(\"Nama produk sesuai\", function(){\r",
+									"    pm.expect(jsonData.data.name).to.eql(\"Cake Rasa Buah\")\r",
+									"});\r",
+									"pm.environment.set(\"productID\", jsonData.data.productId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "2c2cc2fb-9607-46e6-8c11-506831d80c2f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category_id\": \"{{categoryId}}\",\r\n    \"code\": \"{{randomString}}{{$randomAlphaNumeric}}\",\r\n    \"name\": \"Cake Rasa Buah\",\r\n    \"price\": \"35000\",\r\n    \"cost\": \"30000\",\r\n    \"stock\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/products",
+						"description": "API untuk menambahkan produk\n\nPenjelasan field:\n\n- category_id -> id kategori yang akan digunakan pada produk\n- code -> kode atau sku dari produk\n- name -> nama produk\n- price -> harga jual produk\n- cost -> harga beli produk\n- stock -> jumlah stok dari produk"
+					},
+					"response": []
+				},
+				{
+					"name": "Get product detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e2d4d7ee-5db6-4cbe-abca-63d835b34d0c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.test(\"Status get product detail is success\", function(){\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"productCode\", jsonData.data.product.code);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "07f517d1-dc00-43f7-92e4-65f782c72d0d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/products/{{productID}}",
+						"description": "API untuk mendapatkan detail produk yang telah dibuat\n\nPenjelasan field:\n\n- product id -> id product yang ingin ditampilkan detailnya"
+					},
+					"response": []
+				},
+				{
+					"name": "Get product list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "84b2ebec-c0ea-4344-8670-763a8a7fbdcd",
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = pm.response.json();\r",
+									"productid = pm.environment.get(\"productID\");\r",
+									"pm.test(\"Status success\", function(){\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"if(jsonData.data.products.length == 0){\r",
+									"    pm.test(\"Produk tidak ada dilist\", function(){\r",
+									"    pm.expect(pm.response.text()).to.not.include(productid);\r",
+									"    });\r",
+									"    postman.setNextRequest(null);\r",
+									"    //console.log(\"stop\");\r",
+									"}else{\r",
+									"    pm.test(\"Produk ada dilist\", function(){\r",
+									"    pm.expect(pm.response.text()).to.include(productid);\r",
+									"    });\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "9b900c7f-7d06-4268-8259-6c3c5a087c76",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products?page=1&q=cake&withStock=true&withCategory=true&categoryId={{categoryId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "q",
+									"value": "cake"
+								},
+								{
+									"key": "withStock",
+									"value": "true"
+								},
+								{
+									"key": "withCategory",
+									"value": "true"
+								},
+								{
+									"key": "categoryId",
+									"value": "{{categoryId}}"
+								}
+							]
+						},
+						"description": "API untuk mendapatkan list produk yang sudah dibuat\n\nPenjelasan field:\n\n- page -> jumlah halaman yang ingin ditampilkan\n- q -> query search berdasarkan nama produk\n- withStock -> query untuk menampilkan data dengan stok atau tidak\n- withCategory -> query untuk menmpilkan data dengan kategori atau tidak"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c6dca533-200d-44b8-b57f-062f919a157a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.test(\"Update product is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"pm.test(\"Product name is updated\", function () {\r",
+									"    pm.expect(jsonData.data.name).to.eql(\"Cake Rasa Buah Update\")\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "3917d6ce-0f03-416f-afef-6e0da0890ff2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category_id\": \"{{categoryId}}\",\r\n    \"code\": \"{{productCode}}\",\r\n    \"name\": \"Cake Rasa Buah Update\",\r\n    \"price\": \"35000\",\r\n    \"cost\": \"30000\",\r\n    \"stock\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/products/{{productID}}",
+						"description": "API untuk mengupdate produk\n\nPenjelasan field:\n\n- category_id -> id kategori dari produk\n- code -> code atau sku dari produk\n- name -> nama produk\n- price -> harga jual produk\n- cost -> harga beli produk\n- stock -> jumlah stok dari produk"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e50db9ef-bb25-4f49-8955-b271b7fd6fc4",
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.test(\"Status delete product is success\", function(){\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"pm.test(\"Produk berhasil dihapus\", function(){\r",
+									"    pm.expect(jsonData.message).to.eql(\"Product berhasil dihapus\")\r",
+									"});\r",
+									"//run get product list to validate product is already deleted or no\r",
+									"postman.setNextRequest(\"Get product list\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "cfd30946-11cc-4e4d-b27f-5e43b53f0c70",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{base_url}}/products/{{productID}}",
+						"description": "API untuk menghapus produk yang telah dibuat\n\nPenjelasan field:\n\n- product id -> id product yang ingin dihapus"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "8d66ef26-7542-41f2-8eab-bdf7becf9538",
+			"description": "API Management product"
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf9a39fa-4b9b-4c8f-b61f-7711bd23444f",
+								"exec": [
+									"jsonData =  pm.response.json();\r",
+									"pm.environment.set(\"userId\", jsonData.data.userId);\r",
+									"//console.log(jsonData.data.userId);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "c10f1687-1cf2-4133-8990-375c3b4df0da",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"are\",\r\n    \"email\": \"are@email.com\",\r\n    \"password\": \"qashdjk\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/users"
+					},
+					"response": []
+				},
+				{
+					"name": "Get user list",
+					"_postman_id": "4318486f-ed2c-40f1-9173-35b57d5299f7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"are\",\r\n    \"email\": \"are@email.com\",\r\n    \"password\": \"qashdjk\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/users/{{userId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5e309c4f-3b31-4462-8345-0204233fc225",
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"string_you_want_to_search\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "608f3c66-b694-4683-bfaf-fccf55880769",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/users/{{userId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"_postman_id": "3022d5bb-fc16-4f83-bc75-c6635c12ecb4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"are update\",\r\n    \"email\": \"kasir1@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/users/123"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"_postman_id": "0f4f4850-fbbd-4adf-84b4-30af02921feb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{accessToken}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/users/{{userId}}"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "ed01b8b0-77cb-4212-ab36-5ef1916edd47",
+			"description": "User management"
+		}
+	]
+}
