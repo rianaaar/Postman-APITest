@@ -590,7 +590,8 @@
 								}
 							}
 						},
-						"url": "{{base_url}}/users/{{userId}}"
+						"url": "{{base_url}}/users/{{userId}}",
+						"description": "API untuk menampilkan detail data user by User ID"
 					},
 					"response": []
 				},
