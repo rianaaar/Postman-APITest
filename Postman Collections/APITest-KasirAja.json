@@ -499,11 +499,18 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "cf9a39fa-4b9b-4c8f-b61f-7711bd23444f",
+								"id": "3fa15691-9f37-4389-aec5-4b7574cbfa99",
 								"exec": [
+									"pm.test('Status code is 201', function(){\r",
+									"    pm.response.to.have.status(201)\r",
+									"});\r",
 									"jsonData =  pm.response.json();\r",
 									"pm.environment.set(\"userId\", jsonData.data.userId);\r",
 									"//console.log(jsonData.data.userId);\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"    pm.expect(jsonData.message).to.eql(\"User berhasil ditambahkan\");\r",
+									"});\r",
 									"\r",
 									""
 								],
