@@ -645,6 +645,27 @@
 				},
 				{
 					"name": "Delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9886e137-672e-4842-86e7-2e1c692d3646",
+								"exec": [
+									"pm.test(\"Status code is 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.test(\"Status delete user is success\", function(){\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"pm.test(\"User berhasil dihapus\", function(){\r",
+									"    pm.expect(jsonData.message).to.eql(\"User berhasil dihapus\")\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "0f4f4850-fbbd-4adf-84b4-30af02921feb",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
