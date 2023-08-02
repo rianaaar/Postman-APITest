@@ -541,7 +541,7 @@
 							}
 						},
 						"url": "{{base_url}}/users",
-						"description": "API untuk menambahkan user\n\nPenjelasan field:\n\n- name -> nama kategori yang ingin ditambahkan\n- description -> deskripsi dari kategori yang ingin ditambahkan"
+						"description": "API untuk menambahkan user\n\nPenjelasan field:\n\n- name -> nama user yang ingin ditambahkan\n- email -> email user yang ingin ditambahkan\n- password -> password user yang ingin ditambahkan"
 					},
 					"response": []
 				},
